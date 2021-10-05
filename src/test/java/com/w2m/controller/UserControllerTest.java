@@ -66,7 +66,7 @@ class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json)
                 .accept(MediaType.APPLICATION_JSON))
-        .andDo(MockMvcResultHandlers.print())
+       // .andDo(MockMvcResultHandlers.print())
         .andExpect(MockMvcResultMatchers.status().isUnauthorized());
   }
 }

@@ -10,7 +10,5 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class HeroeDto {
 
-    @NotNull
-    @NotBlank
-    private String heroeName;
+  @NotNull @NotBlank private String heroeName;
 }

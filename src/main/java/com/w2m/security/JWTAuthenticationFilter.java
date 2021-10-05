@@ -3,12 +3,10 @@ package com.w2m.security;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.w2m.entity.UserEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,7 +15,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -52,17 +49,23 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
       Authentication auth)
       throws IOException, ServletException {
 
-    String token =
-        Jwts.builder()
-            .setIssuedAt(new Date())
-            .setIssuer(SecurityConstants.ISSUER_INFO)
-            .setSubject(((User) auth.getPrincipal()).getUsername())
-            .setExpiration(
-                new Date(System.currentTimeMillis() + SecurityConstants.TOKEN_EXPIRATION_TIME))
-            .signWith(SignatureAlgorithm.HS512, SecurityConstants.SUPER_SECRET_KEY)
-            .compact();
+    String token = createToken(((User) auth.getPrincipal()).getUsername());
+
     response.addHeader(
         SecurityConstants.HEADER_AUTHORIZACION_KEY,
         SecurityConstants.TOKEN_BEARER_PREFIX + " " + token);
+  }
+
+  public static String createToken(String username){
+    String token =
+            Jwts.builder()
+                    .setIssuedAt(new Date())
+                    .setIssuer(SecurityConstants.ISSUER_INFO)
+                    .setSubject(username)
+                    .setExpiration(
+                            new Date(System.currentTimeMillis() + SecurityConstants.TOKEN_EXPIRATION_TIME))
+                    .signWith(SignatureAlgorithm.HS512, SecurityConstants.SUPER_SECRET_KEY)
+                    .compact();
+    return token;
   }
 }

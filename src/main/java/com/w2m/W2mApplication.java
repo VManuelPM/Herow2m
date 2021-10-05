@@ -16,12 +16,11 @@ import org.springframework.cache.annotation.EnableCaching;
 @OpenAPIDefinition(
     info = @Info(title = ApplicationConstants.API_TITLE, version = ApplicationConstants.VERSION))
 @SecurityScheme(
-        name = SecurityConstants.SWAGGER_BEARER_NAME,
-        type = SecuritySchemeType.HTTP,
-        bearerFormat = SecurityConstants.SWAGGER_BEARER_FORMAT,
-        scheme = SecurityConstants.SWAGGER_SCHEMA,
-        in = SecuritySchemeIn.HEADER
-)
+    name = SecurityConstants.SWAGGER_BEARER_NAME,
+    type = SecuritySchemeType.HTTP,
+    bearerFormat = SecurityConstants.SWAGGER_BEARER_FORMAT,
+    scheme = SecurityConstants.SWAGGER_SCHEMA,
+    in = SecuritySchemeIn.HEADER)
 public class W2mApplication {
   public static void main(String[] args) {
     SpringApplication.run(W2mApplication.class, args);

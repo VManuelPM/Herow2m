@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -29,15 +28,13 @@ public class HeroeController {
 
   @Autowired HeroeService heroeService;
   private HeroeEntity heroeEntity;
-  private final Logger logger = LoggerFactory.getLogger(HeroeController.class);
 
   @Operation(summary = ApplicationConstants.HEROE_GET)
   @GetMapping()
   @TrackExecutionTime
   public ResponseEntity<List<HeroeEntity>> getHeroes() {
     List<HeroeEntity> heroes = heroeService.getHeroes();
-    if(heroes.isEmpty())
-      throw new NotFoundException("Heroes not found");
+    if (heroes.isEmpty()) throw new NotFoundException("Heroes not found");
     return new ResponseEntity<>(heroes, HttpStatus.OK);
   }
 
@@ -55,7 +52,7 @@ public class HeroeController {
   @TrackExecutionTime
   public ResponseEntity<List<HeroeEntity>> getHeroeByName(
       @PathVariable("heroeName") String heroeName) {
-    if(heroeName.isEmpty() || heroeName.isBlank())
+    if (heroeName.isEmpty() || heroeName.isBlank())
       throw new BadRequestException("Heroe name is required");
     if (!heroeService.existByHeroeNameContains(StringUtils.capitalize(heroeName)))
       throw new NotFoundException("Heroe not found");

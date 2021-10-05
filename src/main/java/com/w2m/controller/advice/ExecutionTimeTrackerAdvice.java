@@ -1,6 +1,5 @@
 package com.w2m.controller.advice;
 
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -24,7 +23,7 @@ public class ExecutionTimeTrackerAdvice {
             .concat(String.valueOf(point.getSignature()))
             .concat(" time taken to execute ")
             .concat(String.valueOf(endTime - startTime))
-                .concat(" Milliseconds"));
+            .concat(" Milliseconds"));
     return obj;
   }
 }

@@ -11,7 +11,6 @@ public final class ApplicationConstants {
   public static final String SAVE_HEROE = "Save a Heroe";
   public static final String UPDATE_HEROE = "Update a Heroe";
   public static final String DELETE_HEROE = "Delete a Heroe";
-
   public static final String USER_TITLE = "User";
   public static final String USER_DESCRIPTION =
       "To use Heroes Endpoints you need first Login and after you have to put the token in swagger authorizathion";
