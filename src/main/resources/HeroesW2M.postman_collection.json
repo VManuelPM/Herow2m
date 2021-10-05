@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "e5c63e15-f000-491a-bbbe-fd18f9d9af67",
+		"name": "HeroesW2M",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Heroes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzMwODA1ODEsImlzcyI6IlZNYW51ZWxQTSIsInN1YiI6ImFkbWluIiwiZXhwIjoxNjMzOTQ0NTgxfQ.XhSWXJcy-3Q1MKXFOf5aTcgCpE75kyXSmmfbX0Uspo-9qXn1opy2qyUO_dct3KdV8W216joyy036itpNiKUWCg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get By id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzMwODA1ODEsImlzcyI6IlZNYW51ZWxQTSIsInN1YiI6ImFkbWluIiwiZXhwIjoxNjMzOTQ0NTgxfQ.XhSWXJcy-3Q1MKXFOf5aTcgCpE75kyXSmmfbX0Uspo-9qXn1opy2qyUO_dct3KdV8W216joyy036itpNiKUWCg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get By name",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzMwODA1ODEsImlzcyI6IlZNYW51ZWxQTSIsInN1YiI6ImFkbWluIiwiZXhwIjoxNjMzOTQ0NTgxfQ.XhSWXJcy-3Q1MKXFOf5aTcgCpE75kyXSmmfbX0Uspo-9qXn1opy2qyUO_dct3KdV8W216joyy036itpNiKUWCg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getName/man",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getName",
+						"man"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save Heroe",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzMwODA1ODEsImlzcyI6IlZNYW51ZWxQTSIsInN1YiI6ImFkbWluIiwiZXhwIjoxNjMzOTQ0NTgxfQ.XhSWXJcy-3Q1MKXFOf5aTcgCpE75kyXSmmfbX0Uspo-9qXn1opy2qyUO_dct3KdV8W216joyy036itpNiKUWCg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"heroeName\": \"Catwoman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Heroe",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzMwODA1ODEsImlzcyI6IlZNYW51ZWxQTSIsInN1YiI6ImFkbWluIiwiZXhwIjoxNjMzOTQ0NTgxfQ.XhSWXJcy-3Q1MKXFOf5aTcgCpE75kyXSmmfbX0Uspo-9qXn1opy2qyUO_dct3KdV8W216joyy036itpNiKUWCg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"heroeName\": \"Deadpool\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Heroe",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzMwODA1ODEsImlzcyI6IlZNYW51ZWxQTSIsInN1YiI6ImFkbWluIiwiZXhwIjoxNjMzOTQ0NTgxfQ.XhSWXJcy-3Q1MKXFOf5aTcgCpE75kyXSmmfbX0Uspo-9qXn1opy2qyUO_dct3KdV8W216joyy036itpNiKUWCg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
