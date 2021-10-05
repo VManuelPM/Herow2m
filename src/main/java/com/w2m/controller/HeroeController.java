@@ -2,6 +2,7 @@ package com.w2m.controller;
 
 import com.w2m.config.exception.BadRequestException;
 import com.w2m.config.exception.NotFoundException;
+import com.w2m.controller.advice.TrackExecutionTime;
 import com.w2m.dto.HeroeDto;
 import com.w2m.dto.MessageDto;
 import com.w2m.entity.HeroeEntity;
@@ -32,6 +33,7 @@ public class HeroeController {
 
   @Operation(summary = ApplicationConstants.HEROE_GET)
   @GetMapping()
+  @TrackExecutionTime
   public ResponseEntity<List<HeroeEntity>> getHeroes() {
     List<HeroeEntity> heroes = heroeService.getHeroes();
     if(heroes.isEmpty())
@@ -41,6 +43,7 @@ public class HeroeController {
 
   @Operation(summary = ApplicationConstants.HEROE_BY_ID)
   @GetMapping("/{idHeroe}")
+  @TrackExecutionTime
   public ResponseEntity<HeroeEntity> getHeroeById(@PathVariable("idHeroe") int idHeroe) {
     if (!heroeService.existByIdHeroe(idHeroe)) throw new NotFoundException("Heroe not found");
     heroeService.getHeroe(idHeroe).ifPresent(obj -> heroeEntity = obj);
@@ -49,6 +52,7 @@ public class HeroeController {
 
   @Operation(summary = ApplicationConstants.HEROE_BY_NAME)
   @GetMapping("/getName/{heroeName}")
+  @TrackExecutionTime
   public ResponseEntity<List<HeroeEntity>> getHeroeByName(
       @PathVariable("heroeName") String heroeName) {
     if(heroeName.isEmpty() || heroeName.isBlank())
@@ -61,6 +65,7 @@ public class HeroeController {
 
   @Operation(summary = ApplicationConstants.SAVE_HEROE)
   @PostMapping()
+  @TrackExecutionTime
   public ResponseEntity<?> saveHeroe(@RequestBody HeroeDto heroeDto) {
     if (StringUtils.isBlank(heroeDto.getHeroeName()))
       throw new NotFoundException("The heroe name is required");
@@ -73,6 +78,7 @@ public class HeroeController {
 
   @Operation(summary = ApplicationConstants.UPDATE_HEROE)
   @PutMapping("/{idHeroe}")
+  @TrackExecutionTime
   public ResponseEntity<?> updateHeroe(
       @PathVariable("idHeroe") int idHeroe, @RequestBody HeroeDto heroeDto) {
 
@@ -90,6 +96,7 @@ public class HeroeController {
 
   @Operation(summary = ApplicationConstants.DELETE_HEROE)
   @DeleteMapping("/{idHeroe}")
+  @TrackExecutionTime
   public ResponseEntity<?> deleteHeroe(@PathVariable("idHeroe") int idHeroe) {
     if (!heroeService.existByIdHeroe(idHeroe)) throw new NotFoundException("Heroe not found");
     heroeService.deleteHeroe(idHeroe);
