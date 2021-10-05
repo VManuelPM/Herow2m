@@ -6,7 +6,6 @@ plugins {
 }
 
 group = 'com.w2m'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
@@ -52,4 +51,8 @@ jacoco {
 
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
+}
+
+jar{
+    baseName('w2m')
 }
