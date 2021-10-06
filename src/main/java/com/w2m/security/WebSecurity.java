@@ -45,7 +45,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         .cors()
         .and()
         .csrf()
-        .ignoringAntMatchers(SecurityConstants.H2_URL)
         .disable()
         .headers()
         .frameOptions()

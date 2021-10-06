@@ -27,17 +27,11 @@ import java.util.Map;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UserControllerTest {
 
-  @MockBean private UserRepository userRepository;
-
-  @Autowired private TestRestTemplate restTemplate;
-
   @Autowired private WebApplicationContext context;
 
   private MockMvc mvc;
 
   private UserDto user;
-  private HttpHeaders headers;
-  private HttpEntity httpEntity;
 
   public UserControllerTest() {
     user = new UserDto();

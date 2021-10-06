@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ExecutionTimeTrackerAdvice {
 
-  Logger logger = LoggerFactory.getLogger(ExecutionTimeTrackerAdvice.class);
+  final Logger logger = LoggerFactory.getLogger(ExecutionTimeTrackerAdvice.class);
 
   @Around("@annotation(com.w2m.controller.advice.TrackExecutionTime)")
   public Object trackTime(ProceedingJoinPoint point) throws Throwable {
@@ -19,11 +19,8 @@ public class ExecutionTimeTrackerAdvice {
     Object obj = point.proceed();
     long endTime = System.currentTimeMillis();
     logger.info(
-        "Method name "
-            .concat(String.valueOf(point.getSignature()))
-            .concat(" time taken to execute ")
-            .concat(String.valueOf(endTime - startTime))
-            .concat(" Milliseconds"));
+        "Method name {} time taken to execute {} milliseconds",
+        point.getSignature(), (endTime - startTime));
     return obj;
   }
 }

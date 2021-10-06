@@ -15,11 +15,11 @@ public class ExceptionConfig {
 
   @ExceptionHandler(NotFoundException.class)
   public ResponseEntity<MessageDto> notFoundException(Exception e) {
-    return new ResponseEntity(new MessageDto(e.getMessage()), HttpStatus.NOT_FOUND);
+    return new ResponseEntity<>(new MessageDto(e.getMessage()), HttpStatus.NOT_FOUND);
   }
 
   @ExceptionHandler({BadRequestException.class, DataIntegrityViolationException.class})
   public ResponseEntity<MessageDto> badRequestException(Exception e) {
-    return new ResponseEntity(new MessageDto(e.getMessage()), HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<>(new MessageDto(e.getMessage()), HttpStatus.BAD_REQUEST);
   }
 }

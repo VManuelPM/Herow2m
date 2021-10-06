@@ -1,9 +1,7 @@
 package com.w2m.service;
 
-import com.w2m.config.exception.NotFoundException;
 import com.w2m.entity.HeroeEntity;
 import com.w2m.repository.HeroeRepository;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +18,14 @@ import java.util.Optional;
 @Transactional
 public class HeroeService {
 
-  private Logger logger = LoggerFactory.getLogger(HeroeService.class);
+  private final Logger logger = LoggerFactory.getLogger(HeroeService.class);
 
-  @Autowired HeroeRepository heroeRepository;
+  private HeroeRepository heroeRepository;
+
+  @Autowired
+  public void setHeroeRepository(HeroeRepository heroeRepository) {
+    this.heroeRepository = heroeRepository;
+  }
 
   public List<HeroeEntity> getHeroes() {
     return heroeRepository.findAll();

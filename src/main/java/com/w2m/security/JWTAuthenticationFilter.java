@@ -1,26 +1,28 @@
 package com.w2m.security;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.w2m.entity.UserEntity;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+
+import javax.servlet.FilterChain;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
   private AuthenticationManager authenticationManager;
+
+  public JWTAuthenticationFilter() {}
 
   public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
     this.authenticationManager = authenticationManager;
@@ -46,8 +48,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
       HttpServletRequest request,
       HttpServletResponse response,
       FilterChain chain,
-      Authentication auth)
-      throws IOException, ServletException {
+      Authentication auth) {
 
     String token = createToken(((User) auth.getPrincipal()).getUsername());
 
@@ -56,16 +57,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         SecurityConstants.TOKEN_BEARER_PREFIX + " " + token);
   }
 
-  public static String createToken(String username){
-    String token =
-            Jwts.builder()
-                    .setIssuedAt(new Date())
-                    .setIssuer(SecurityConstants.ISSUER_INFO)
-                    .setSubject(username)
-                    .setExpiration(
-                            new Date(System.currentTimeMillis() + SecurityConstants.TOKEN_EXPIRATION_TIME))
-                    .signWith(SignatureAlgorithm.HS512, SecurityConstants.SUPER_SECRET_KEY)
-                    .compact();
-    return token;
+  public String createToken(String username) {
+    return Jwts.builder()
+        .setIssuedAt(new Date())
+        .setIssuer(SecurityConstants.ISSUER_INFO)
+        .setSubject(username)
+        .setExpiration(
+            new Date(System.currentTimeMillis() + SecurityConstants.TOKEN_EXPIRATION_TIME))
+        .signWith(SignatureAlgorithm.HS512, SecurityConstants.SUPER_SECRET_KEY)
+        .compact();
   }
 }

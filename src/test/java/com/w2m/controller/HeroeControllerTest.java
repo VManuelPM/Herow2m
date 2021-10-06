@@ -33,31 +33,20 @@ class HeroeControllerTest {
   private HttpHeaders headers;
   private HttpEntity httpEntity;
   protected String token;
+  protected JWTAuthenticationFilter jwtAuthenticationFilter;
 
   public HeroeControllerTest() {
     heroe = new HeroeEntity(TestConstants.HEROE_ID_BD, TestConstants.HEROE_NAME_BD);
     headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
-    token = JWTAuthenticationFilter.createToken(TestConstants.USERNAME);
-    headers.set("Authorization","Bearer " + token);
+    jwtAuthenticationFilter = new JWTAuthenticationFilter();
+    token = jwtAuthenticationFilter.createToken(TestConstants.USERNAME);
+    headers.set(TestConstants.AUTH, "Bearer " + token);
     httpEntity = new HttpEntity(headers);
   }
 
   @BeforeEach
   void setUp() {}
-
-  @Test
-  @Order(2)
-  void getHeroes() {
-    List<HeroeEntity> heroes = Arrays.asList(heroe);
-    // given
-    BDDMockito.given(heroeRepository.findAll()).willReturn(heroes);
-    // when
-    ResponseEntity<HeroeEntity[]> heroeEntityResponse =
-        restTemplate.exchange("/", HttpMethod.GET, httpEntity, HeroeEntity[].class);
-    // then
-    assertThat(heroeEntityResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-  }
 
   @Test
   @Order(1)
@@ -74,15 +63,29 @@ class HeroeControllerTest {
   }
 
   @Test
+  @Order(2)
+  void getHeroes() {
+    List<HeroeEntity> heroes = Arrays.asList(heroe);
+    // given
+    BDDMockito.given(heroeRepository.findAll()).willReturn(heroes);
+    // when
+    ResponseEntity<HeroeEntity[]> heroeEntityResponse =
+        restTemplate.exchange("/", HttpMethod.GET, httpEntity, HeroeEntity[].class);
+    // then
+    assertThat(heroeEntityResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+  }
+
+  @Test
   @Order(3)
   void putHeroeById() throws JsonProcessingException {
     Map<String, String> map = new HashMap<>();
-    map.put("heroeName", TestConstants.HEROE_NAME );
+    map.put("heroeName", TestConstants.HEROE_NAME);
     ObjectMapper objectMapper = new ObjectMapper();
     HttpEntity<?> request = new HttpEntity(objectMapper.writeValueAsString(map), headers);
     // when
     ResponseEntity<HeroeEntity> heroeEntityResponse =
-            restTemplate.exchange("/{idHeroe}",HttpMethod.PUT, request, HeroeEntity.class, TestConstants.HEROE_ID_BD);
+        restTemplate.exchange(
+            "/{idHeroe}", HttpMethod.PUT, request, HeroeEntity.class, TestConstants.HEROE_ID_BD);
     // then
     assertThat(heroeEntityResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
   }

@@ -1,6 +1,11 @@
 package com.w2m.security;
 
 public class SecurityConstants {
+
+  private SecurityConstants() {
+    throw new IllegalStateException("Utility class");
+  }
+
   // Spring Security
   public static final String LOGIN_URL = "/login";
   public static final String HEADER_AUTHORIZACION_KEY = "Authorization";
@@ -15,7 +20,7 @@ public class SecurityConstants {
   public static final String H2_URL = "/h2-console/**";
 
   // SWAGGER
-  public static final String[] AUTH_WHITELIST = {
+  protected static final String[] AUTH_WHITELIST = {
     // -- swagger ui
     "/v2/api-docs/**",
     "/v3/api-docs/**",
