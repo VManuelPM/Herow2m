@@ -89,4 +89,16 @@ class HeroeControllerTest {
     // then
     assertThat(heroeEntityResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
   }
+
+  @Test
+  @Order(4)
+  void deleteHeroeById(){
+    HttpEntity<?> request = new HttpEntity(headers);
+    // when
+    ResponseEntity<HeroeEntity> heroeEntityResponse =
+            restTemplate.exchange(
+                    "/{idHeroe}", HttpMethod.DELETE, request, HeroeEntity.class, TestConstants.HEROE_ID_BD);
+    // then
+    assertThat(heroeEntityResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+  }
 }
